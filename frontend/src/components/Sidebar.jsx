@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Sidebar = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
   return (
     <aside className="fixed left-0 top-0 h-full w-[260px] bg-[#1e2330] text-slate-300 z-50 flex flex-col font-inter">
       {/* Brand / Logo Area */}
@@ -17,9 +26,9 @@ const Sidebar = () => {
       {/* User Profile */}
       <div className="px-6 py-4 border-t border-b border-slate-700/50 mb-4 bg-[#232938]">
         <div className="flex items-center gap-3">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrCDi0fXyt4oAdRBqETmswl30NeVmueNWSeUe3MwuXR4Lp6eynizRvAUGe13xkzWMaIzl-ya3_1rbP316xIy88rg2N6RlPRgJa-iNifmIpegv63jm7vYLRxHr8H31jjvTAAtDbISgaKGt7TuhoKKh5Q-EtnWgb73I_hU1xDuHt4x1JVIqQe1vQ525x9nz1jDCPeYjDuxzqcPtAnSIEdlD8ok2XZP9wSAtR4iatB5PtdSmzxF9ZNrYpz5E06OctjW4N2ilDOOXTKk0c" alt="User" className="w-10 h-10 rounded-full object-cover border-2 border-slate-600" />
+          <img src={user?.avatar || "https://ui-avatars.com/api/?name=" + (user?.name || "User") + "&background=random"} alt="User" className="w-10 h-10 rounded-full object-cover border-2 border-slate-600" />
           <div>
-            <h3 className="text-xs font-bold text-white tracking-wide">CHEKURIPREMSAI</h3>
+            <h3 className="text-[10px] font-bold text-white tracking-wide uppercase truncate w-32">{user?.name || 'STUDENT'}</h3>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
               <span className="text-[10px] text-slate-400 font-medium">Online</span>

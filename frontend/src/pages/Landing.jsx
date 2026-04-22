@@ -24,11 +24,11 @@ const Landing = () => {
             <a href="#" className="hover:text-white transition-colors">Contact</a>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/dashboard" className="hidden lg:block text-sm font-medium hover:text-indigo-300 transition-colors">
+            <Link to="/login" className="text-sm font-medium hover:text-indigo-300 transition-colors">
               Log in
             </Link>
-            <Link to="/dashboard" className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all shadow-lg shadow-indigo-600/30">
-              Login to Dashboard
+            <Link to="/signup" className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all shadow-lg shadow-indigo-600/30">
+              Sign Up
             </Link>
           </div>
         </nav>
@@ -50,12 +50,12 @@ const Landing = () => {
           </p>
           
           <div className="flex items-center gap-4">
-            <Link to="/dashboard" className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-xl shadow-indigo-600/20 flex items-center gap-2">
-              Login to Dashboard
+            <Link to="/login" className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-xl shadow-indigo-600/20 flex items-center gap-2">
+              Log In
             </Link>
-            <button className="bg-transparent border-2 border-slate-700 hover:border-slate-500 hover:bg-slate-800 text-white font-semibold px-8 py-3.5 rounded-xl transition-all flex items-center gap-2">
-              <span className="material-symbols-outlined text-lg">play_circle</span> See how it works
-            </button>
+            <Link to="/signup" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white font-semibold px-8 py-3.5 rounded-xl transition-all flex items-center gap-2">
+              Create Account
+            </Link>
           </div>
 
           <div className="mt-16 flex items-center gap-12 text-sm font-medium text-slate-400">
@@ -253,12 +253,12 @@ const Landing = () => {
               </div>
             </div>
             <div className="flex items-center gap-4 shrink-0">
-               <Link to="/dashboard" className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-xl shadow-indigo-600/20">
-                 Login to Dashboard
+               <Link to="/login" className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-xl shadow-indigo-600/20">
+                 Log In
                </Link>
-               <button className="bg-transparent border border-slate-600 hover:border-slate-400 text-white font-semibold px-8 py-3.5 rounded-xl transition-all">
-                 Book a demo
-               </button>
+               <Link to="/signup" className="bg-transparent border border-slate-600 hover:border-slate-400 text-white font-semibold px-8 py-3.5 rounded-xl transition-all">
+                 Sign Up Free
+               </Link>
             </div>
           </div>
 

@@ -4,15 +4,28 @@ const cors = require('cors');
 require('dotenv').config();
 
 const academicRoutes = require('./routes/academicRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
 
 // Routes
+const authController = require('./controllers/authController');
+console.log('Registering routes directly in index.js...');
 app.use('/api/academic', academicRoutes);
+
+// Auth routes directly
+app.post('/api/auth/signup', authController.signup);
+app.post('/api/auth/login', authController.login);
+
+console.log('Direct auth routes registered: /api/auth/signup, /api/auth/login');
 
 app.get('/', (req, res) => {
     res.send('Student Management System API is running');

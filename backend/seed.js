@@ -1,25 +1,56 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const User = require('./models/user');
 const { Attendance, Material, PYQ } = require('./models/academic');
 
 const seedDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/student_mgmt');
         console.log('Connected to MongoDB for seeding...');
 
         // Clear existing test data
-        await User.deleteMany({ email: { $regex: '@test.com$' } });
+        await User.deleteMany({});
         await Material.deleteMany({});
         await PYQ.deleteMany({});
         await Attendance.deleteMany({});
 
-        console.log('Creating dummy students...');
+        console.log('Creating users...');
+        const hashedPassword = await bcrypt.hash('password123', 10);
+        const tempPassword = await bcrypt.hash('temp', 10);
+
         const students = await User.insertMany([
-            { name: 'John Doe', email: 'john@test.com', role: 'student', branch: 'Computer Science', year: 2, password: 'password123' },
-            { name: 'Jane Smith', email: 'jane@test.com', role: 'student', branch: 'Information Tech', year: 3, password: 'password123' },
-            { name: 'Alice Walker', email: 'alice@test.com', role: 'student', branch: 'Electronics', year: 1, password: 'password123' }
+            { 
+                name: 'Niraj pandey', 
+                email: 'niraj@example.com', 
+                rollno: '22011p0533', 
+                phone: '9876543210',
+                role: 'student', 
+                branch: 'cse', 
+                year: 1, 
+                password: tempPassword 
+            },
+            { 
+                name: 'John Doe', 
+                email: 'john@test.com', 
+                rollno: '22011p0001', 
+                phone: '1234567890',
+                role: 'student', 
+                branch: 'Computer Science', 
+                year: 2, 
+                password: hashedPassword 
+            },
+            { 
+                name: 'Jane Smith', 
+                email: 'jane@test.com', 
+                rollno: '22011p0002', 
+                phone: '2345678901',
+                role: 'student', 
+                branch: 'Information Tech', 
+                year: 3, 
+                password: hashedPassword 
+            }
         ]);
 
         console.log('Creating subject materials...');

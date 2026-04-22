@@ -8,6 +8,8 @@ import MarketplaceProductDetail from './pages/Admin/Marketplace/MarketplaceProdu
 import MarketplaceStorefront from './pages/Admin/Marketplace/MarketplaceStorefront';
 import MarketplaceListItem from './pages/Admin/Marketplace/MarketplaceListItem';
 import Landing from './pages/Landing';
+import Login from './pages/Auth/Login';
+import Signup from './pages/Auth/Signup';
 
 // Layout wrapper for the admin dashboard since it uses a Sidebar
 const DashboardLayout = () => {
@@ -26,6 +28,8 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="lost-and-found" element={<LostAndFound />} />

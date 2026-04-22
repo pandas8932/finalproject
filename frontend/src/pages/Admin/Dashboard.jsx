@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Custom Academic Calendar built based on user's specific PDF parse instructions
 const AcademicCalendar = () => {
@@ -110,8 +111,8 @@ const AcademicCalendar = () => {
 };
 
 
-// Top Global Navbar replacing old minimal Navbar because inside image there's a big top blue bar component
-const Topbar = () => {
+// Top Global Navbar
+const Topbar = ({ user, handleLogout }) => {
   return (
     <header className="sticky top-0 z-40 w-full h-16 bg-[#4A3AFF] text-white flex justify-between items-center px-6 shadow-sm">
       <div className="flex items-center gap-6">
@@ -134,13 +135,23 @@ const Topbar = () => {
           <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 border-2 border-[#4A3AFF] rounded-full group-hover:scale-125 transition-transform"></span>
         </button>
         
-        <div className="flex items-center gap-3 pl-2">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrCDi0fXyt4oAdRBqETmswl30NeVmueNWSeUe3MwuXR4Lp6eynizRvAUGe13xkzWMaIzl-ya3_1rbP316xIy88rg2N6RlPRgJa-iNifmIpegv63jm7vYLRxHr8H31jjvTAAtDbISgaKGt7TuhoKKh5Q-EtnWgb73I_hU1xDuHt4x1JVIqQe1vQ525x9nz1jDCPeYjDuxzqcPtAnSIEdlD8ok2XZP9wSAtR4iatB5PtdSmzxF9ZNrYpz5E06OctjW4N2ilDOOXTKk0c" alt="User" className="w-8 h-8 rounded-full object-cover border border-white/20" />
+        <div className="flex items-center gap-3 pl-2 group relative cursor-pointer">
+          <img src={user?.avatar || "https://ui-avatars.com/api/?name=" + (user?.name || "User") + "&background=random"} alt="User" className="w-8 h-8 rounded-full object-cover border border-white/20" />
           <div className="hidden sm:block text-left">
-            <h4 className="text-xs font-bold leading-tight">CHEKURIPREMSAI</h4>
+            <h4 className="text-xs font-bold leading-tight uppercase">{user?.name || 'STUDENT'}</h4>
             <div className="flex items-center gap-1 text-[10px] text-indigo-100 font-medium">
-               Student <span className="material-symbols-outlined text-[14px]">expand_more</span>
+               {user?.role || 'Student'} <span className="material-symbols-outlined text-[14px]">expand_more</span>
             </div>
+          </div>
+          
+          {/* Logout Dropdown */}
+          <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+            <button 
+              onClick={handleLogout}
+              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 font-bold"
+            >
+              <span className="material-symbols-outlined text-[18px]">logout</span> Logout
+            </button>
           </div>
         </div>
       </div>
@@ -149,9 +160,27 @@ const Topbar = () => {
 }
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    } else {
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
   return (
     <div className="w-full bg-[#f8f9fc] text-slate-800 font-inter min-h-screen">
-      <Topbar />
+      <Topbar user={user} handleLogout={handleLogout} />
       
       <div className="p-6 md:p-8 max-w-[1600px] mx-auto space-y-8">
         
@@ -159,7 +188,7 @@ const Dashboard = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-              Welcome back, CHEKURIPREMSAI! <span className="text-2xl drop-shadow-sm">👋</span>
+              Welcome back, <span className="uppercase">{user?.name?.split(' ')[0] || 'Student'}</span>! <span className="text-2xl drop-shadow-sm">👋</span>
             </h1>
             <p className="text-slate-500 text-sm mt-1">Here's what's happening with your academic journey today.</p>
           </div>

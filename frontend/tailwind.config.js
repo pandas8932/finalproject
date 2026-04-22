@@ -48,6 +48,7 @@ export default {
         "outline-variant": "#c6c6cd",
         "on-tertiary-fixed": "#07006c",
         "tertiary-fixed": "#e1e0ff",
+        "primary-fixed": "#dbe2f9",
         "primary": "#000000",
         "surface-bright": "#fcf8fa"
       },

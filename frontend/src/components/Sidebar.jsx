@@ -2,40 +2,103 @@ import React from 'react';
 
 const Sidebar = () => {
   return (
-    <aside className="fixed left-0 top-0 h-full w-[280px] bg-white/95 backdrop-blur-md border-r border-slate-100 shadow-[4px_0_24px_rgba(15,23,42,0.02)] z-50 flex flex-col p-6 gap-2">
-      <div className="flex items-center gap-3 mb-8 px-2">
-        <div className="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
-          <span className="material-symbols-outlined text-on-primary-container" style={{fontVariationSettings: "'FILL' 1"}}>school</span>
+    <aside className="fixed left-0 top-0 h-full w-[260px] bg-[#1e2330] text-slate-300 z-50 flex flex-col font-inter">
+      {/* Brand / Logo Area */}
+      <div className="flex items-center gap-3 px-6 py-6 mb-2">
+        <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/20">
+          <span className="material-symbols-outlined text-white text-[20px]" style={{fontVariationSettings: "'FILL' 1"}}>school</span>
         </div>
         <div>
-          <h1 className="text-lg font-bold text-slate-900 leading-none">EduCore SMS</h1>
-          <p className="text-xs text-slate-500 mt-1">Admin Portal</p>
+          <h1 className="text-lg font-bold text-white leading-tight">Student Portal</h1>
+          <p className="text-[10px] text-slate-400 font-medium">Dashboard</p>
         </div>
       </div>
-      <nav className="flex-1 space-y-1">
-        <a className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100 rounded-lg transition-all font-inter text-sm font-medium" href="#">
-          <span className="material-symbols-outlined">dashboard</span> Dashboard
+
+      {/* User Profile */}
+      <div className="px-6 py-4 border-t border-b border-slate-700/50 mb-4 bg-[#232938]">
+        <div className="flex items-center gap-3">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrCDi0fXyt4oAdRBqETmswl30NeVmueNWSeUe3MwuXR4Lp6eynizRvAUGe13xkzWMaIzl-ya3_1rbP316xIy88rg2N6RlPRgJa-iNifmIpegv63jm7vYLRxHr8H31jjvTAAtDbISgaKGt7TuhoKKh5Q-EtnWgb73I_hU1xDuHt4x1JVIqQe1vQ525x9nz1jDCPeYjDuxzqcPtAnSIEdlD8ok2XZP9wSAtR4iatB5PtdSmzxF9ZNrYpz5E06OctjW4N2ilDOOXTKk0c" alt="User" className="w-10 h-10 rounded-full object-cover border-2 border-slate-600" />
+          <div>
+            <h3 className="text-xs font-bold text-white tracking-wide">CHEKURIPREMSAI</h3>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+              <span className="text-[10px] text-slate-400 font-medium">Online</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto px-4 pb-6 space-y-1 custom-scrollbar">
+        <a className="flex items-center gap-3 px-3 py-2.5 bg-indigo-600 text-white rounded-lg transition-all font-medium text-xs shadow-md shadow-indigo-600/20" href="#">
+          <span className="material-symbols-outlined text-[18px]">home</span> Dashboard
         </a>
-        <a className="flex items-center gap-3 px-4 py-3 text-indigo-600 bg-indigo-50/50 rounded-lg transition-all font-inter text-sm font-medium border-l-2 border-indigo-600" href="#">
-          <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>group</span> Students
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">person</span> Profile
         </a>
-        <a className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100 rounded-lg transition-all font-inter text-sm font-medium" href="#">
-          <span className="material-symbols-outlined">school</span> Courses
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">folder_shared</span> Student Documents
         </a>
-        <a className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100 rounded-lg transition-all font-inter text-sm font-medium" href="#">
-          <span className="material-symbols-outlined">calendar_month</span> Attendance
+        
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="https://jntuh-exams-papers.onrender.com" target="_blank" rel="noopener noreferrer">
+          <span className="material-symbols-outlined text-[18px]">menu_book</span> Jntu Papers
         </a>
-        <a className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100 rounded-lg transition-all font-inter text-sm font-medium" href="#">
-          <span className="material-symbols-outlined">grade</span> Grades
+        
+        <div className="relative group">
+          <a className="flex items-center justify-between px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-[18px]">notifications</span> Notifications
+            </div>
+            <span className="w-5 h-5 flex items-center justify-center rounded-full bg-indigo-600 text-[10px] font-bold text-white group-hover:scale-110 transition-transform">3</span>
+          </a>
+        </div>
+        
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">find_in_page</span> Rec / Rev Notifications
         </a>
-        <a className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100 rounded-lg transition-all font-inter text-sm font-medium" href="#">
-          <span className="material-symbols-outlined">settings</span> Settings
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="https://learn-loop.in" target="_blank" rel="noopener noreferrer">
+          <span className="material-symbols-outlined text-[18px]">quiz</span> Quick test
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-indigo-400 font-bold bg-indigo-500/10 hover:bg-indigo-500/20 shadow-[inset_2px_0_0_0_#818cf8] rounded-lg transition-all text-xs" href="/dashboard/lost-and-found">
+          <span className="material-symbols-outlined text-[18px]">inventory_2</span> Lost & Found
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-emerald-400 font-bold bg-emerald-500/10 hover:bg-emerald-500/20 shadow-[inset_2px_0_0_0_#34d399] rounded-lg transition-all text-xs" href="/dashboard/marketplace">
+          <span className="material-symbols-outlined text-[18px]">storefront</span> Marketplace
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">workspace_premium</span> Certificates
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">payments</span> Payments
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">description</span> Re-Admission / Project / Late
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">auto_stories</span> Subjects - Course Materials
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">feedback</span> Student Feedback
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">receipt_long</span> Miscellaneous Payments
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">campaign</span> News Bulletin
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
+          <span className="material-symbols-outlined text-[18px]">gavel</span> Grievance
         </a>
       </nav>
-      <div className="mt-auto pt-6 border-t border-slate-100">
-        <a className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-all font-inter text-sm font-medium text-error" href="#">
-          <span className="material-symbols-outlined">logout</span> Log Out
-        </a>
+
+      {/* Footer Actions */}
+      <div className="mt-auto px-4 py-4 border-t border-slate-700/50">
+        <button className="w-full flex items-center justify-between px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all text-xs font-medium">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px]">chevron_left</span> Collapse Menu
+          </div>
+          <span className="material-symbols-outlined text-[16px]">keyboard_double_arrow_left</span>
+        </button>
       </div>
     </aside>
   );

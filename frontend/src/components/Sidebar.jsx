@@ -129,6 +129,16 @@ const Sidebar = () => {
         <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
           <span className="material-symbols-outlined text-[18px]">gavel</span> Grievance
         </a>
+
+        {/* Admin Master Section */}
+        {user?.role === 'admin' && (
+          <div className="pt-4 mt-4 border-t border-slate-700/50">
+            <p className="px-3 text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Admin Tools</p>
+            <a className="flex items-center gap-3 px-3 py-2.5 text-rose-400 font-bold bg-rose-500/10 hover:bg-rose-500/20 shadow-[inset_2px_0_0_0_#f43f5e] rounded-lg transition-all text-xs" href="/dashboard/admin/master">
+              <span className="material-symbols-outlined text-[18px]">admin_panel_settings</span> Admin Master
+            </a>
+          </div>
+        )}
       </nav>
 
       {/* Footer Actions */}

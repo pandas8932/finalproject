@@ -1,44 +1,42 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+const dotenv = require('dotenv');
 
-const academicRoutes = require('./routes/academicRoutes');
-const authRoutes = require('./routes/authRoutes');
+dotenv.config();
 
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(cors());
 app.use(express.json());
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-});
+
+// Database Connection
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/supplysetu')
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 
 // Routes
-const authController = require('./controllers/authController');
-console.log('Registering routes directly in index.js...');
-app.use('/api/academic', academicRoutes);
-
-// Auth routes
+const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+// Marketplace routes
+app.use('/api/market', require('./routes/marketRoutes'));
+
+// Lost and Found routes
+app.use('/api/lost', require('./routes/lostRoutes'));
+
+// Admin routes
+app.use('/api/admin', require('./routes/adminRoutes'));
+
+// Student Elective routes
+app.use('/api/electives', require('./routes/electiveRoutes'));
 
 app.get('/', (req, res) => {
     res.send('Student Management System API is running');
 });
 
 const PORT = process.env.PORT || 5000;
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/student_mgmt')
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((err) => {
-        console.error('MongoDB connection error (check if MongoDB is running):', err.message);
-    });
-
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

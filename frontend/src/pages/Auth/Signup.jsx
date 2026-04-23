@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Mail, Hash, Phone, BookOpen, Calendar, Lock, ArrowRight, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { User, Mail, Hash, Phone, BookOpen, Calendar, Lock, ArrowRight, GraduationCap, CheckCircle2, ShieldCheck, Key } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -13,6 +13,8 @@ const Signup = () => {
     phone: '',
     branch: '',
     year: '1',
+    role: 'student',
+    adminCode: '',
     password: '',
     confirmPassword: ''
   });
@@ -41,6 +43,8 @@ const Signup = () => {
         phone: formData.phone,
         branch: formData.branch,
         year: parseInt(formData.year),
+        role: formData.role,
+        adminCode: formData.adminCode,
         password: formData.password
       });
       
@@ -131,6 +135,49 @@ const Signup = () => {
               </AnimatePresence>
 
               <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {/* Role Selection */}
+                <div className="space-y-1.5 sm:col-span-2">
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Account Type</label>
+                  <div className="flex gap-4">
+                    {['student', 'admin'].map((r) => (
+                      <button
+                        key={r}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, role: r })}
+                        className={`flex-1 py-3 rounded-xl border-2 font-bold text-sm transition-all flex items-center justify-center gap-2 ${formData.role === r ? 'bg-blue-600/10 border-blue-600 text-blue-500 shadow-lg shadow-blue-500/10' : 'bg-white/5 border-white/10 text-slate-500 hover:border-white/20'}`}
+                      >
+                        {r === 'admin' ? <ShieldCheck className="w-4 h-4" /> : <User className="w-4 h-4" />}
+                        {r.charAt(0).toUpperCase() + r.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <AnimatePresence>
+                  {formData.role === 'admin' && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="space-y-1.5 sm:col-span-2 overflow-hidden"
+                    >
+                      <label className="text-xs font-bold text-rose-400 uppercase tracking-wider ml-1">Admin Passcode</label>
+                      <div className="relative group/input">
+                        <Key className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-rose-500 transition-colors" />
+                        <input 
+                          type="password" 
+                          name="adminCode"
+                          required
+                          value={formData.adminCode}
+                          onChange={handleChange}
+                          className="w-full bg-rose-500/5 border border-rose-500/20 rounded-xl py-3.5 pl-11 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-rose-500/40 focus:border-rose-500 transition-all"
+                          placeholder="Enter Secret Passcode"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
                 <div className="space-y-1.5 sm:col-span-2">
                   <label className="text-xs font-bold text-slate-400 uppercase tracking-wider ml-1">Full Name</label>
                   <div className="relative group/input">
@@ -267,13 +314,13 @@ const Signup = () => {
                     whileTap={{ scale: 0.99 }}
                     type="submit" 
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-xl shadow-blue-500/20 transition-all flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed"
+                    className={`w-full bg-gradient-to-r ${formData.role === 'admin' ? 'from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 shadow-rose-500/20' : 'from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-blue-500/20'} text-white font-bold py-4 rounded-xl shadow-xl transition-all flex items-center justify-center gap-3 group disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {loading ? (
                       <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     ) : (
                       <>
-                        <span>Create Account</span>
+                        <span>{formData.role === 'admin' ? 'Create Admin Account' : 'Create Student Account'}</span>
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}

@@ -7,7 +7,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key_123';
 // Signup logic
 exports.signup = async (req, res) => {
     try {
-        const { name, email, rollno, phone, branch, year, password } = req.body;
+        const { name, email, rollno, phone, branch, year, password, role, adminCode } = req.body;
+
+        // Check if user is trying to register as admin
+        if (role === 'admin') {
+            const ADMIN_PASSCODE = process.env.ADMIN_PASSCODE || 'SUPPLYSETU_ADMIN_2026';
+            if (adminCode !== ADMIN_PASSCODE) {
+                return res.status(401).json({ message: 'Invalid Admin Passcode' });
+            }
+        }
 
         // Check if user already exists
         let user = await User.findOne({ $or: [{ email }, { rollno }] });
@@ -26,7 +34,8 @@ exports.signup = async (req, res) => {
             phone,
             branch,
             year,
-            password: hashedPassword
+            password: hashedPassword,
+            role: role || 'student'
         });
 
         await user.save();

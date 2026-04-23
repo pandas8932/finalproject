@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Admin/Dashboard';
 import LostAndFound from './pages/Admin/LostAndFound';
+import AdminMasterSettings from './pages/Admin/AdminMasterSettings';
 import MarketplaceHome from './pages/Admin/Marketplace/MarketplaceHome';
 import MarketplaceProductDetail from './pages/Admin/Marketplace/MarketplaceProductDetail';
 import MarketplaceStorefront from './pages/Admin/Marketplace/MarketplaceStorefront';
@@ -41,10 +42,12 @@ const App = () => {
           <Route path="marketplace/storefront" element={<MarketplaceStorefront />} />
           <Route path="marketplace/product/:id" element={<MarketplaceProductDetail />} />
           <Route path="marketplace/post-item" element={<MarketplaceListItem />} />
+          <Route path="marketplace/edit-item/:id" element={<MarketplaceListItem />} />
           <Route path="open-elective/application" element={<Application />} />
           <Route path="open-elective/results" element={<Results />} />
           <Route path="attendance" element={<Attendance />} />
           <Route path="timetable" element={<Timetable />} />
+          <Route path="admin/master" element={<AdminMasterSettings />} />
         </Route>
       </Routes>
     </BrowserRouter>

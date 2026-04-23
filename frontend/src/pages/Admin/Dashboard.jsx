@@ -185,16 +185,50 @@ const Dashboard = () => {
       <div className="p-6 md:p-8 max-w-[1600px] mx-auto space-y-8">
         
         {/* Welcome Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-              Welcome back, <span className="uppercase">{user?.name?.split(' ')[0] || 'Student'}</span>! <span className="text-2xl drop-shadow-sm">👋</span>
+            <h1 className="text-3xl md:text-5xl font-serif text-slate-800 tracking-tight flex items-center gap-2">
+              Welcome back, <br className="hidden md:block" /><span className="italic">{user?.name || 'Julianna'} {user?.name ? '' : 'Thorne'}.</span>
             </h1>
-            <p className="text-slate-500 text-sm mt-1">Here's what's happening with your academic journey today.</p>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-white border border-indigo-100 rounded-lg shadow-sm text-indigo-600 font-semibold text-sm">
-             <span className="material-symbols-outlined text-[18px]">calendar_today</span> May 19, 2025 <span className="text-slate-300 font-normal mx-1">|</span> <span className="text-slate-600">Monday</span>
+          <div className="flex items-center gap-4">
+            <div className="bg-[#FAF5EE] border border-orange-100 rounded-2xl p-4 px-6 text-center shadow-sm">
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Current CGPA</p>
+                <p className="text-3xl font-serif font-bold text-[#c2652a]">3.84</p>
+            </div>
+            <div className="bg-[#FAF5EE] border border-orange-100 rounded-2xl p-4 px-6 text-center shadow-sm">
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Total Credits</p>
+                <p className="text-xl font-bold text-slate-800 mt-2">112 <span className="text-slate-400 text-sm">/ 140</span></p>
+            </div>
           </div>
+        </div>
+
+        {/* Open Elective Banner Row */}
+        <div className="w-full relative bg-gradient-to-r from-[#ca6829] to-[#d97736] rounded-[1.5rem] p-6 md:px-8 md:py-6 text-white overflow-hidden shadow-lg border border-orange-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-2">
+            {/* Decorative background blocks */}
+            <div className="absolute right-0 top-0 w-1/2 h-full opacity-30 flex gap-4 pointer-events-none p-8" style={{ transform: 'rotate(5deg) scale(1.2)' }}>
+                <div className="w-1/3 h-full bg-white/20 rounded-lg blur-sm"></div>
+                <div className="w-1/3 h-3/4 bg-white/20 rounded-lg blur-[2px] mt-4"></div>
+                <div className="w-1/3 h-5/6 bg-white/10 rounded-lg blur-md mt-2"></div>
+            </div>
+
+            <div className="relative z-10 max-w-3xl flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-bold tracking-widest uppercase text-orange-200">Open Elective</span>
+                    <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                        <span className="material-symbols-outlined text-[12px]">school</span>
+                    </div>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-serif mb-2 leading-tight">Open Elective Registration</h2>
+                <p className="text-orange-50/90 text-sm leading-relaxed mb-0 font-medium">
+                    Curate your academic journey for the upcoming Spring 2024 semester. Over 45 interdisciplinary courses available.
+                </p>
+            </div>
+            
+            <div className="relative z-10 flex flex-wrap shrink-0 items-center justify-start gap-3">
+                <button onClick={() => navigate('/dashboard/open-elective/application')} className="bg-white text-[#ca6829] px-5 py-2.5 rounded-lg font-bold text-sm hover:scale-105 transition-transform shadow-md">Explore Courses</button>
+                <button className="bg-white/10 text-white border border-white/20 px-5 py-2.5 rounded-lg font-bold text-sm hover:bg-white/20 transition-colors">View Roadmap</button>
+            </div>
         </div>
 
         {/* Top Feature Cards Layout tightly matching image */}

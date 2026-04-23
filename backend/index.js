@@ -21,11 +21,8 @@ const authController = require('./controllers/authController');
 console.log('Registering routes directly in index.js...');
 app.use('/api/academic', academicRoutes);
 
-// Auth routes directly
-app.post('/api/auth/signup', authController.signup);
-app.post('/api/auth/login', authController.login);
-
-console.log('Direct auth routes registered: /api/auth/signup, /api/auth/login');
+// Auth routes
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('Student Management System API is running');

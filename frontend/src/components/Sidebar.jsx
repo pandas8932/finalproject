@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Sidebar = () => {
   const [user, setUser] = useState(null);
+  const [isOpenElectivesOpen, setIsOpenElectivesOpen] = useState(false);
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -68,6 +69,12 @@ const Sidebar = () => {
         <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="https://learn-loop.in" target="_blank" rel="noopener noreferrer">
           <span className="material-symbols-outlined text-[18px]">quiz</span> Quick test
         </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-sky-400 font-bold bg-sky-500/10 hover:bg-sky-500/20 shadow-[inset_2px_0_0_0_#38bdf8] rounded-lg transition-all text-xs" href="/dashboard/attendance">
+          <span className="material-symbols-outlined text-[18px]">how_to_reg</span> Attendance
+        </a>
+        <a className="flex items-center gap-3 px-3 py-2.5 text-cyan-400 font-bold bg-cyan-500/10 hover:bg-cyan-500/20 shadow-[inset_2px_0_0_0_#22d3ee] rounded-lg transition-all text-xs" href="/dashboard/timetable">
+          <span className="material-symbols-outlined text-[18px]">calendar_today</span> Schedule
+        </a>
         <a className="flex items-center gap-3 px-3 py-2.5 text-indigo-400 font-bold bg-indigo-500/10 hover:bg-indigo-500/20 shadow-[inset_2px_0_0_0_#818cf8] rounded-lg transition-all text-xs" href="/dashboard/lost-and-found">
           <span className="material-symbols-outlined text-[18px]">inventory_2</span> Lost & Found
         </a>
@@ -77,6 +84,30 @@ const Sidebar = () => {
         <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
           <span className="material-symbols-outlined text-[18px]">workspace_premium</span> Certificates
         </a>
+        
+        {/* Open Elective Collapsible Menu */}
+        <div className="flex flex-col">
+          <button 
+            onClick={() => setIsOpenElectivesOpen(!isOpenElectivesOpen)}
+            className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all font-medium text-xs ${isOpenElectivesOpen ? 'text-white bg-white/10' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
+          >
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-[18px]">menu_book</span> Open Elective
+            </div>
+            <span className={`material-symbols-outlined text-[16px] transition-transform ${isOpenElectivesOpen ? 'rotate-180' : ''}`}>expand_more</span>
+          </button>
+          
+          <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpenElectivesOpen ? 'max-h-32 opacity-100 mt-1' : 'max-h-0 opacity-0'}`}>
+            <div className="pl-9 pr-3 py-1 space-y-1 border-l-2 border-indigo-500/30 ml-4 mb-2">
+              <a className="flex items-center gap-2 py-2 text-slate-400 hover:text-indigo-400 transition-colors text-xs font-semibold" href="/dashboard/open-elective/application">
+                <span className="material-symbols-outlined text-[14px]">description</span> Application Form
+              </a>
+              <a className="flex items-center gap-2 py-2 text-slate-400 hover:text-indigo-400 transition-colors text-xs font-semibold" href="/dashboard/open-elective/results">
+                <span className="material-symbols-outlined text-[14px]">verified</span> Selection Results
+              </a>
+            </div>
+          </div>
+        </div>
         <a className="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-all font-medium text-xs" href="#">
           <span className="material-symbols-outlined text-[18px]">payments</span> Payments
         </a>

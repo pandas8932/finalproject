@@ -10,6 +10,10 @@ import MarketplaceListItem from './pages/Admin/Marketplace/MarketplaceListItem';
 import Landing from './pages/Landing';
 import Login from './pages/Auth/Login';
 import Signup from './pages/Auth/Signup';
+import Application from './pages/Admin/OpenElective/Application';
+import Results from './pages/Admin/OpenElective/Results';
+import Attendance from './pages/Admin/Attendance';
+import Timetable from './pages/Admin/Timetable';
 
 // Layout wrapper for the admin dashboard since it uses a Sidebar
 const DashboardLayout = () => {
@@ -37,6 +41,10 @@ const App = () => {
           <Route path="marketplace/storefront" element={<MarketplaceStorefront />} />
           <Route path="marketplace/product/:id" element={<MarketplaceProductDetail />} />
           <Route path="marketplace/post-item" element={<MarketplaceListItem />} />
+          <Route path="open-elective/application" element={<Application />} />
+          <Route path="open-elective/results" element={<Results />} />
+          <Route path="attendance" element={<Attendance />} />
+          <Route path="timetable" element={<Timetable />} />
         </Route>
       </Routes>
     </BrowserRouter>
